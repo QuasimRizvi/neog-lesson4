@@ -19,14 +19,34 @@ const oarea = document.querySelector(".output")
 //     })
 // })
 
-btn.addEventListener("click",_=>{
-    let ip = tarea.value
-    console.log(ip)
-    //oarea.innerHTML = ip
-    oarea.innerHTML = ip
-    const op2 = document.createTextNode(ip+" This is using create Text Node")
-    document.querySelector("body").appendChild(op2)
+// btn.addEventListener("click",_=>{
+//     let ip = tarea.value
+//     console.log(ip)
+//     //oarea.innerHTML = ip
+//     oarea.innerHTML = ip
+//     const op2 = document.createTextNode(ip+" This is using create Text Node")
+//     document.querySelector("body").appendChild(op2)
 
-    const op3 = document.createTextNode(oarea.innerText+" This is using insert before")
-    document.body.insertBefore(op3,oarea)
+//     const op3 = document.createTextNode(oarea.innerText+" This is using insert before")
+//     document.body.insertBefore(op3,oarea)
+// })
+
+const url = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json"
+
+const setUrl = custom=>{
+    return url+"?"+custom
+}
+
+const errorEvent = err=>console.log(err)
+
+btn.addEventListener("click",_=>{
+    let searchUrl = setUrl("text='Quasim'")
+    console.log(searchUrl)
+    fetch(searchUrl)
+    .then(response=>response.json())
+    .then(output=>{
+        console.log(output.contents.translated)
+    })
+    .catch(errorEvent)
+    // fetch("https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json")
 })
