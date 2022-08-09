@@ -45,7 +45,7 @@ btn.addEventListener("click",_=>{
     fetch(searchUrl)
     .then(response=>response.json())
     .then(output=>{
-        console.log(output.contents.translated)
+        oarea.innerText = output.contents.translated
     })
     .catch(errorEvent)
     // fetch("https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json")
