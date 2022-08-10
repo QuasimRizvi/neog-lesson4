@@ -1,46 +1,53 @@
-// var name = prompt("Enter your name")
-
-// console.log(name)
-// alert("Your name is "+name)
-
 const btn = document.querySelector(".btn-primary")
 const tarea = document.querySelector("#input-text")
 const oarea = document.querySelector(".output")
 
-// const input1 = document.querySelector("input[name=translator]")
-// const allinput = document.querySelectorAll("input")
-
-// btn.addEventListener('click',_=>{
-//     let inputtxt = tarea.value
-//     console.log(inputtxt)
-//     console.log(input1.value)
-//     allinput.forEach(e=>{
-//         console.log(e.value)
-//     })
-// })
-
-// btn.addEventListener("click",_=>{
-//     let ip = tarea.value
-//     console.log(ip)
-//     //oarea.innerHTML = ip
-//     oarea.innerHTML = ip
-//     const op2 = document.createTextNode(ip+" This is using create Text Node")
-//     document.querySelector("body").appendChild(op2)
-
-//     const op3 = document.createTextNode(oarea.innerText+" This is using insert before")
-//     document.body.insertBefore(op3,oarea)
-// })
+const btnyoda = document.querySelector(".yoda")
+const btnshakes = document.querySelector(".shakespeare")
 
 const url = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json"
+const yoda = "https://api.funtranslations.com/translate/yoda.json"
+const shakespeare = "https://api.funtranslations.com/translate/shakespeare.json"
+const dogo = "https://api.funtranslations.com/translate/dogo.json"
+const boston = "https://api.funtranslations.com/translate/boston.json"
+const minion = "https://api.funtranslations.com/translate/minion.json"
 
-const setUrl = custom=>{
-    return url+"?"+custom
+let defaulttranslate = yoda
+
+btnyoda.addEventListener("click",_=>{
+    if(btnyoda.classList.contains("active")){
+        btnyoda.classList.remove("active")
+        btnshakes.classList.add("active")
+        defaulttranslate = shakespeare
+    }
+    else{
+        btnyoda.classList.add("active")
+        btnshakes.classList.remove("active")
+        defaulttranslate = yoda
+    }
+})
+
+btnshakes.addEventListener("click",_=>{
+    if(btnshakes.classList.contains("active")){
+        btnyoda.classList.add("active")
+        btnshakes.classList.remove("active")
+        defaulttranslate = yoda
+    }
+    else{
+        btnyoda.classList.remove("active")
+        btnshakes.classList.add("active")
+        defaulttranslate = shakespeare
+    }
+})
+
+const setUrl = (type,custom)=>{
+    return type+"?"+custom
 }
 
 const errorEvent = err=>console.log(err)
 
 btn.addEventListener("click",_=>{
-    let searchUrl = setUrl("text='Quasim'")
+    let searchUrl = setUrl(defaulttranslate,"text="+tarea.value)
     console.log(searchUrl)
     fetch(searchUrl)
     .then(response=>response.json())

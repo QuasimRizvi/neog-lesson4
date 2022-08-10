@@ -24,6 +24,19 @@
         display: block;
         max-width: 50%;
       }
+      .container {
+        width: 50vw;
+      }
+      .container div {
+        display: inline-block;
+        border: 2px black solid;
+        padding: 2px;
+        margin: auto;
+        cursor: pointer;
+      }
+      .active {
+        background: greenyellow;
+      }
     </style>
   </head>
   <body>
@@ -31,6 +44,13 @@
     <textarea name="text" id="input-text" cols="30" rows="10"></textarea>
     <!-- <input type="text" name="translator" />
     <input type="text" name="random" /> -->
+    <div class="container">
+      <div class="yoda active">Yoda</div>
+      <div class="shakespeare">Shakespeare</div>
+      <div class="dogo">Dogo</div>
+      <div class="minions">Minions</div>
+      <div class="boston">Boston</div>
+    </div>
     <button class="btn-primary">Press For Fun</button>
     <div class="output"></div>
     <script src="index.js"></script>
