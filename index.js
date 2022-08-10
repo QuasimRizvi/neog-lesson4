@@ -8,37 +8,39 @@ const btnshakes = document.querySelector(".shakespeare")
 const url = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json"
 const yoda = "https://api.funtranslations.com/translate/yoda.json"
 const shakespeare = "https://api.funtranslations.com/translate/shakespeare.json"
-const dogo = "https://api.funtranslations.com/translate/dogo.json"
+const dogo = "https://api.funtranslations.com/translate/doge.json"
 const boston = "https://api.funtranslations.com/translate/boston.json"
 const minion = "https://api.funtranslations.com/translate/minion.json"
 
+const translateMappings = {
+    "yoda":yoda,
+    "shakespeare":shakespeare,
+    "dogo":dogo,
+    "boston":boston,
+    "minion":minion
+}
+
 let defaulttranslate = yoda
 
-btnyoda.addEventListener("click",_=>{
-    if(btnyoda.classList.contains("active")){
-        btnyoda.classList.remove("active")
-        btnshakes.classList.add("active")
-        defaulttranslate = shakespeare
-    }
-    else{
-        btnyoda.classList.add("active")
-        btnshakes.classList.remove("active")
-        defaulttranslate = yoda
-    }
+const containerchildren = document.querySelectorAll(".btn")
+
+containerchildren.forEach(c=>{
+    c.addEventListener("click",_=>{
+        if(!c.classList.contains("active")){
+            containerchildren.forEach(btn=>{
+                if(btn.classList.contains("active")){
+                    btn.classList.remove("active")
+                }
+            })
+            c.classList.add("active")
+            defaulttranslate = translateMappings[c.classList[0]]
+
+            console.log(defaulttranslate)
+
+        }
+    })
 })
 
-btnshakes.addEventListener("click",_=>{
-    if(btnshakes.classList.contains("active")){
-        btnyoda.classList.add("active")
-        btnshakes.classList.remove("active")
-        defaulttranslate = yoda
-    }
-    else{
-        btnyoda.classList.remove("active")
-        btnshakes.classList.add("active")
-        defaulttranslate = shakespeare
-    }
-})
 
 const setUrl = (type,custom)=>{
     return type+"?"+custom
@@ -55,5 +57,4 @@ btn.addEventListener("click",_=>{
         oarea.innerText = output.contents.translated
     })
     .catch(errorEvent)
-    // fetch("https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json")
 })
